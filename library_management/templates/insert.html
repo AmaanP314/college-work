@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Insert Book</title>
+</head>
+<body>
+    <h1>Insert Book</h1>
+    <form method="POST">
+        <input type="text" name="title" placeholder="Book Title" required>
+        <input type="text" name="author" placeholder="Author" required>
+        <input type="number" name="year" placeholder="Publication Year" required>
+        <input type="submit" value="Insert Book">
+    </form>
+    <a href="{{ url_for('index') }}">Go Back</a>
+</body>
+</html>

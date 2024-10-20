@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Update Book</title>
+</head>
+<body>
+    <h1>Update Book</h1>
+    <form method="POST">
+        <input type="text" name="book_id" placeholder="Book ID to Update" required>
+        <input type="text" name="title" placeholder="New Book Title" required>
+        <input type="text" name="author" placeholder="New Author" required>
+        <input type="number" name="year" placeholder="New Publication Year" required>
+        <input type="submit" value="Update Book">
+    </form>
+    <a href="{{ url_for('index') }}">Go Back</a>
+</body>
+</html>
