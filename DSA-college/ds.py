@@ -75,62 +75,56 @@ class Queue:
     def display(self):
         print(self.queue[self.front:self.rear])
 
-class CircularQueue:
+class CirQueue:
     def __init__(self, size):
         self.size = size
         self.queue = [None] * size
-        self.front = -1
-        self.rear = -1
+        self.start = -1
+        self.end = -1
 
     def isFull(self):
-        return (self.rear + 1) % self.size == self.front
+        return (self.end + 1) % self.size == self.start
 
     def isEmpty(self):
-        return self.front == -1
+        return self.start == -1
 
     def peek(self):
         if self.isEmpty():
-            print("Circular Queue is empty")
             return None
-        return self.queue[self.front]
+        return self.queue[self.start]
 
     def enqueue(self, value):
         if self.isFull():
-            print("Circular Queue Overflow")
-        elif self.front == -1:
-            self.front = self.rear = 0
-            self.queue[self.rear] = value
+            print("Queue is full! Cannot enqueue.")
+            return None
+        elif self.isEmpty():
+            self.start = self.end = 0
         else:
-            self.rear = (self.rear + 1) % self.size
-            self.queue[self.rear] = value
+            self.end = (self.end + 1) % self.size
+        self.queue[self.end] = value
 
     def dequeue(self):
         if self.isEmpty():
-            print("Circular Queue Underflow")
+            print("Queue is empty! Cannot dequeue.")
             return None
-        elif self.front == self.rear:
-            value = self.queue[self.front]
-            self.queue[self.front] = None
-            self.front = self.rear = -1
-            return value
+        value = self.queue[self.start]
+        if self.start == self.end:
+            self.start = self.end = -1
         else:
-            value = self.queue[self.front]
-            self.queue[self.front] = None
-            self.front = (self.front + 1) % self.size
-            return value
+            self.start = (self.start + 1) % self.size
+        return value
 
-    def print_queue(self):
+    def display(self):
         if self.isEmpty():
-            print("Circular Queue is empty")
+            print("Queue is empty.")
             return
-        i = self.front
+        i = self.start
         while True:
-            print(self.queue[i], end=" <- ")
-            if i == self.rear:
+            print(self.queue[i], end=" <- " if i != self.end else "")
+            if i == self.end:
                 break
             i = (i + 1) % self.size
         print()
-
 
 ######### LINKED LIST #########
 
