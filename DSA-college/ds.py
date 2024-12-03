@@ -443,10 +443,9 @@ class Queue:
     
 ##### BST #####
 
-
 class Node:
-    def __init__(self, key):
-        self.key = key
+    def __init__(self, value):
+        self.value = value
         self.left = None
         self.right = None
 
@@ -454,29 +453,29 @@ class BST:
     def __init__(self):
         self.root = None
 
-    # Insert a new key
-    def insert(self, key):
-        def _insert(root, key):
+    # Insert a new value
+    def insert(self, value):
+        def _insert(root, value):
             if root is None:
-                return Node(key)
-            if key < root.key:
-                root.left = _insert(root.left, key)
-            elif key > root.key:
-                root.right = _insert(root.right, key)
+                return Node(value)
+            if value < root.value:
+                root.left = _insert(root.left, value)
+            elif value > root.value:
+                root.right = _insert(root.right, value)
             return root
 
-        self.root = _insert(self.root, key)
+        self.root = _insert(self.root, value)
 
-    # Delete a key
-    def delete(self, key):
-        def _delete(root, key):
+    # Delete a value
+    def delete(self, value):
+        def _delete(root, value):
             if root is None:
                 return root
 
-            if key < root.key:
-                root.left = _delete(root.left, key)
-            elif key > root.key:
-                root.right = _delete(root.right, key)
+            if value < root.value:
+                root.left = _delete(root.left, value)
+            elif value > root.value:
+                root.right = _delete(root.right, value)
             else:
                 # Node with only one child or no child
                 if root.left is None:
@@ -486,12 +485,12 @@ class BST:
 
                 # Node with two children: Get the inorder successor
                 successor = self.get_min(root.right)
-                root.key = successor.key
-                root.right = _delete(root.right, successor.key)
+                root.value = successor.value
+                root.right = _delete(root.right, successor.value)
 
             return root
 
-        self.root = _delete(self.root, key)
+        self.root = _delete(self.root, value)
 
     # Get minimum value node
     def get_min(self, root):
@@ -500,23 +499,23 @@ class BST:
             current = current.left
         return current
 
-    # Search for a key
-    def search(self, key):
-        def _search(root, key):
-            if root is None or root.key == key:
+    # Search for a value
+    def search(self, value):
+        def _search(root, value):
+            if root is None or root.value == value:
                 return root
-            if key < root.key:
-                return _search(root.left, key)
-            return _search(root.right, key)
+            if value < root.value:
+                return _search(root.left, value)
+            return _search(root.right, value)
 
-        return _search(self.root, key) is not None
+        return _search(self.root, value) is not None
 
     # Inorder traversal (LNR)
     def inorder(self):
         def _inorder(root):
             if root:
                 _inorder(root.left)
-                print(root.key, end=" ")
+                print(root.value, end=" ")
                 _inorder(root.right)
 
         _inorder(self.root)
@@ -525,7 +524,7 @@ class BST:
     def preorder(self):
         def _preorder(root):
             if root:
-                print(root.key, end=" ")
+                print(root.value, end=" ")
                 _preorder(root.left)
                 _preorder(root.right)
 
@@ -537,7 +536,7 @@ class BST:
             if root:
                 _postorder(root.left)
                 _postorder(root.right)
-                print(root.key, end=" ")
+                print(root.value, end=" ")
 
         _postorder(self.root)
 
